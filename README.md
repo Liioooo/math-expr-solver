@@ -1,2 +1,1 @@
-# webpack-ts-scss
-Template for TS &amp; SCSS
+# Math Expression Solver

@@ -7,6 +7,14 @@ export class Solver {
 
 	private _currentTokenIndex = 0;
 
+	constructor(tokens: Token[]) {
+		this._tokens = tokens;
+	}
+
+	public solve() {
+		return this.plusMinus();
+	}
+
 	private get currentToken(): Token {
 		return this._tokens[this._currentTokenIndex];
 	}
@@ -76,14 +84,6 @@ export class Solver {
 			this.eat(TokenType.CLOSE_PAR);
 			return result;
 		}
-	}
-
-	constructor(tokens: Token[]) {
-		this._tokens = tokens;
-	}
-
-	public solve() {
-		return this.plusMinus();
 	}
 
 }

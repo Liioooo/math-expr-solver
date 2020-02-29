@@ -2,7 +2,11 @@ export const enum TokenType {
 	EOF,
 	NUMBER,
 	PLUS,
-	MINUS
+	MINUS,
+	DIV,
+	MULT,
+	OPEN_PAR,
+	CLOSE_PAR
 }
 
 export interface TokenConfig {
@@ -29,6 +33,34 @@ export const tokenConfiguration: Map<TokenType, TokenConfig> = new Map<TokenType
 		TokenType.MINUS,
 		{
 			matcher: /^-/i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.DIV,
+		{
+			matcher: /^\//i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.MULT,
+		{
+			matcher: /^\*/i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.OPEN_PAR,
+		{
+			matcher: /^\(/i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.CLOSE_PAR,
+		{
+			matcher: /^\)/i,
 			typeConverter: input => input
 		}
 	]

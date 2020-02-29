@@ -20,17 +20,28 @@ export class Solver {
 		}
 	}
 
-	private multDiv(): number {
+	private power(): number {
 		let result = this.factor();
+
+		while (this.currentToken.type === TokenType.POWER) {
+			this.eat(TokenType.POWER);
+			result = Math.pow(result, this.factor());
+		}
+
+		return result;
+	}
+
+	private multDiv(): number {
+		let result = this.power();
 
 		while ([TokenType.MULT, TokenType.DIV].includes(this.currentToken.type)) {
 			const currentToken = this.currentToken;
 			if (currentToken.type === TokenType.MULT) {
 				this.eat(TokenType.MULT);
-				result = result * this.factor();
+				result = result * this.power();
 			} else if (currentToken.type === TokenType.DIV) {
 				this.eat(TokenType.DIV);
-				result = result / this.factor();
+				result = result / this.power();
 			}
 		}
 

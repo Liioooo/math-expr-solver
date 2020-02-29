@@ -6,7 +6,8 @@ export const enum TokenType {
 	DIV,
 	MULT,
 	OPEN_PAR,
-	CLOSE_PAR
+	CLOSE_PAR,
+	POWER
 }
 
 export interface TokenConfig {
@@ -61,6 +62,13 @@ export const tokenConfiguration: Map<TokenType, TokenConfig> = new Map<TokenType
 		TokenType.CLOSE_PAR,
 		{
 			matcher: /^\)/i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.POWER,
+		{
+			matcher: /^\^/i,
 			typeConverter: input => input
 		}
 	]

@@ -1,6 +1,7 @@
 export const enum TokenType {
 	EOF,
 	NUMBER,
+	CONSTANT,
 	PLUS,
 	MINUS,
 	DIV,
@@ -22,6 +23,13 @@ export const tokenConfiguration: Map<TokenType, TokenConfig> = new Map<TokenType
 		{
 			matcher: /^[0-9]+\.?[0-9]*/i,
 			typeConverter: input => Number(input)
+		}
+	],
+	[
+		TokenType.CONSTANT,
+		{
+			matcher: /^(e|PI)/i,
+			typeConverter: input => input
 		}
 	],
 	[
@@ -76,7 +84,7 @@ export const tokenConfiguration: Map<TokenType, TokenConfig> = new Map<TokenType
 	[
 		TokenType.FUNCTION,
 		{
-			matcher: /^(cos|sin|tan|log10|sqrt)/i,
+			matcher: /^(cos|sin|tan|log10|ln|sqrt)/i,
 			typeConverter: input => input
 		}
 	]

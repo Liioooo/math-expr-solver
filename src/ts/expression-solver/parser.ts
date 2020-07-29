@@ -5,6 +5,7 @@ import {OperationNode} from './ast/operation-node';
 import {NumberNode} from './ast/number-node';
 import {UnaryNode} from './ast/unary-node';
 import {FunctionNode} from "./ast/function-node";
+import {ConstantNode} from "./ast/constant-node";
 
 export class Parser {
 
@@ -91,6 +92,9 @@ export class Parser {
 			case TokenType.NUMBER:
 				this.eat(TokenType.NUMBER);
 				return new NumberNode(undefined, undefined, currentToken);
+			case TokenType.CONSTANT:
+				this.eat(TokenType.CONSTANT);
+				return new ConstantNode(undefined, undefined, currentToken);
 			case TokenType.FUNCTION:
 				this.eat(TokenType.FUNCTION);
 				this.eat(TokenType.OPEN_PAR);

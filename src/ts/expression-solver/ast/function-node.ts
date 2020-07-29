@@ -12,6 +12,8 @@ export class FunctionNode extends AstNode {
                 return Math.sin(this.child.evaluate());
             case 'log10':
                 return Math.log10(this.child.evaluate());
+            case 'ln':
+                return Math.log(this.child.evaluate());
             case 'sqrt':
                 return Math.sqrt(this.child.evaluate());
         }

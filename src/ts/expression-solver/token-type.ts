@@ -7,7 +7,8 @@ export const enum TokenType {
 	MULT,
 	OPEN_PAR,
 	CLOSE_PAR,
-	POWER
+	POWER,
+	FUNCTION
 }
 
 export interface TokenConfig {
@@ -69,6 +70,13 @@ export const tokenConfiguration: Map<TokenType, TokenConfig> = new Map<TokenType
 		TokenType.POWER,
 		{
 			matcher: /^\^/i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.FUNCTION,
+		{
+			matcher: /^(cos|sin|tan|log10|sqrt)/i,
 			typeConverter: input => input
 		}
 	]

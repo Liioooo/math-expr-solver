@@ -4,6 +4,7 @@ import {TokenType} from './token-type';
 import {OperationNode} from './ast/operation-node';
 import {NumberNode} from './ast/number-node';
 import {UnaryNode} from './ast/unary-node';
+import {FunctionNode} from "./ast/function-node";
 
 export class Parser {
 
@@ -90,6 +91,12 @@ export class Parser {
 			case TokenType.NUMBER:
 				this.eat(TokenType.NUMBER);
 				return new NumberNode(undefined, undefined, currentToken);
+			case TokenType.FUNCTION:
+				this.eat(TokenType.FUNCTION);
+				this.eat(TokenType.OPEN_PAR);
+				let fnNode = new FunctionNode(this.plusMinus(), undefined, currentToken);
+				this.eat(TokenType.CLOSE_PAR);
+				return fnNode;
 			default:
 				this.eat(TokenType.OPEN_PAR);
 				let node = this.plusMinus();

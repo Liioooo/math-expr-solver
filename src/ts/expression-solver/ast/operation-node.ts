@@ -14,6 +14,8 @@ export class OperationNode extends AstNode {
 				return this.left.evaluate() * this.right.evaluate();
 			case TokenType.DIV:
 				return this.left.evaluate() / this.right.evaluate();
+			case TokenType.MOD:
+				return this.left.evaluate() % this.right.evaluate();
 			case TokenType.POWER:
 				return this.left.evaluate() ** this.right.evaluate();
 		}

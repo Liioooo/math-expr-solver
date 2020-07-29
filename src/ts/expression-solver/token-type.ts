@@ -6,6 +6,7 @@ export const enum TokenType {
 	MINUS,
 	DIV,
 	MULT,
+	MOD,
 	OPEN_PAR,
 	CLOSE_PAR,
 	POWER,
@@ -57,6 +58,13 @@ export const tokenConfiguration: Map<TokenType, TokenConfig> = new Map<TokenType
 		TokenType.MULT,
 		{
 			matcher: /^\*/i,
+			typeConverter: input => input
+		}
+	],
+	[
+		TokenType.MOD,
+		{
+			matcher: /^(mod|%)/i,
 			typeConverter: input => input
 		}
 	],

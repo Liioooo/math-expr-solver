@@ -35,7 +35,7 @@ export class Parser {
 	}
 
 	private plusMinus(): AstNode {
-		let node = this.multDiv();
+		let node = this.multDivMod();
 
 		while ([TokenType.PLUS, TokenType.MINUS].includes(this.currentToken.type)) {
 			const currentToken = this.currentToken;
@@ -45,23 +45,28 @@ export class Parser {
 				this.eat(TokenType.MINUS);
 			}
 
-			node = new OperationNode(node, this.multDiv(), currentToken);
+			node = new OperationNode(node, this.multDivMod(), currentToken);
 		}
 
 		return node;
 	}
 
-	private multDiv(): AstNode {
+	private multDivMod(): AstNode {
 		let node = this.power();
 
-		while ([TokenType.MULT, TokenType.DIV].includes(this.currentToken.type)) {
+		while ([TokenType.MULT, TokenType.DIV, TokenType.MOD].includes(this.currentToken.type)) {
 			const currentToken = this.currentToken;
-			if (currentToken.type === TokenType.MULT) {
-				this.eat(TokenType.MULT);
-			} else if (currentToken.type === TokenType.DIV) {
-				this.eat(TokenType.DIV);
+			switch (currentToken.type) {
+				case TokenType.MULT:
+					this.eat(TokenType.MULT);
+					break;
+				case TokenType.DIV:
+					this.eat(TokenType.DIV);
+					break;
+				case TokenType.MOD:
+					this.eat(TokenType.MOD);
+					break;
 			}
-
 			node = new OperationNode(node, this.power(), currentToken);
 		}
 
